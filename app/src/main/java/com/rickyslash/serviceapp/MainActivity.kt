@@ -46,3 +46,16 @@ class MainActivity : AppCompatActivity() {
 // - Give guidance to user: highlight some feature that has limited functionality if the permission not granted (give them error message)
 // - Explain clearly
 // - Don't give error message in fullscreen
+
+// Service don't have interface, but run on main thread
+// example of services: push notification, screen stand by, messaging services, audio player service, etc
+
+// 3 types of Service:
+// - Foreground: can run some operation that could be seen by user (audio player & it's notification). It runs even when user doesn't interact with the app
+// - Background: can run in background (get user location)
+// - Bound: service that being run by another component, but bind to the app (example: client-server interaction). It only stops when there is no other component that is binded (example: on streaming music service)
+
+// every Kotlin class is a service when Inherits/Extends to Service/IntentService class
+// it has it's own lifecycle based on it's types: https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/academy/dos:10a5f27b851604c94a077e64bdc4e2a920220323135537.png
+// to run service from another component such Activity, use `startService(Intent)`
+// to stop service, use `stopService(Intent)` or `stopSelf()` from that Service
