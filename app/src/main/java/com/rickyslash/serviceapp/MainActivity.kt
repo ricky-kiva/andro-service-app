@@ -1,6 +1,7 @@
 package com.rickyslash.serviceapp
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.rickyslash.serviceapp.databinding.ActivityMainBinding
@@ -15,11 +16,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val serviceIntent = Intent(this, MyBackgroundService::class.java)
+        val foregroundServiceIntent = Intent(this, MyForegroundService::class.java)
+
+        // set buttons to start/stop Services
         binding.btnStartBackgroundService.setOnClickListener {
             startService(serviceIntent)
         }
         binding.btnStopBackgroundService.setOnClickListener {
             stopService(serviceIntent)
+        }
+        binding.btnStartForegroundService.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= 26) {
+                startForegroundService(foregroundServiceIntent)
+            } else {
+                startService(foregroundServiceIntent)
+            }
+        }
+        binding.btnStopForegroundService.setOnClickListener {
+            stopService(foregroundServiceIntent)
         }
     }
 }
